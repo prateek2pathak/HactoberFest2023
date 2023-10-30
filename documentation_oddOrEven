@@ -1,0 +1,27 @@
+The following the plan how will I implement Matrix Game will be implemented....By Prateek Pathak(IIB2022042)
+
+
+ `matrix`: A 2D matrix filled with random positive numbers.
+  `lock`: A threading lock to synchronize access to shared resources.
+  `even_score` and `odd_score`: Variables to keep track of each player's score.
+
+1. display_matrix Method : This method prints the current state of the matrix. It's for visualizing the game board.
+
+2.Making a method which checks wheather all cells have been opened or not.
+
+3. Making a method which opens cell after it has been seen by the player.
+
+4. playMethod: This method is where the main game logic is implemented. It takes the player's name (`'Even'` or `'Odd'`) and the row and column they want to play. It then checks the number at that position in the matrix:
+
+   - If the number is even in the matrix and the player is 'Even', the number is added to the `even_score`.
+   - If the number is odd and the player is 'Even', the number is subtracted from the `even_score`.
+   - If the number is odd and the player is 'Odd', the number is added to the `odd_score`.
+   - If the number is even and the player is 'Odd', the number is subtracted from the `odd_score`.
+
+   After the update, it prints the move and the current scores.
+
+4. player_thread Function: This function simulates a player's behavior in a separate thread. It runs in a loop for a fixed number of turns. In each turn, it generates random coordinates (row and column) and calls the `play` method of the game.
+
+5. Main Section: In the main section, an instance of the `MatrixChallenge` class is created, and the initial matrix is displayed. Two threads (`even_thread` and `odd_thread`) are then created, each representing a player. They are started simultaneously, and the main program waits for both threads to finish using the `join` method.
+
+The key concept here is the use of threading to simulate concurrent gameplay for two players. The `lock` ensures that the shared resources (scores and matrix) are accessed in a mutually exclusive manner to prevent data corruption. The random moves and sleep between turns simulate a dynamic and interactive gameplay experience.
